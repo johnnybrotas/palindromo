@@ -1,0 +1,23 @@
+.container{
+	text-align: center;
+}
+h1{
+	font-size: 24px;
+}
+input{
+	display: block;
+	margin: 6px auto;
+	padding: 6px;
+}
+button{
+	padding: 10px;
+	border: none;
+	background-color: #1613bc;
+	color: #fff;
+	border-radius: 3px;
+	cursor: pointer;
+}
+#message{
+	color: red;
+	padding: 15px;
+}
