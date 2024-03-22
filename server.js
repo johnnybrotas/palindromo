@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/palindromo", express.static(path.join(__dirname, "public")));
 
-app.post('/data', (req, res) => {
+app.post('/palindromo', (req, res) => {
 
   const dados = req.body; 
   
