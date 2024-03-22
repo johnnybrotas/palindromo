@@ -42,7 +42,3 @@ Isso enviará uma solicitação POST com a string fornecida para a API e retorna
 ## Contribuição
 
 Contribuições são bem-vindas! Se você encontrar algum problema ou quiser adicionar melhorias à aplicação, sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
