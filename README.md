@@ -34,7 +34,7 @@ Isso iniciará o servidor na porta padrão 3000. Você pode acessar a API em htt
 Para testar a aplicação, você pode usar o comando cURL para enviar solicitações POST com strings para manipulação. Por exemplo:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"texto": "socorram me subi no onibus em marrocos"}' http://localhost:3000/api/manipulacao-string
+curl -X POST -H "Content-Type: application/json" -d '{"texto": "socorram me subi no onibus em marrocos"}' http://localhost:3000/palindromo
 ```
 
 Isso enviará uma solicitação POST com a string fornecida para a API e retornará a resposta.
