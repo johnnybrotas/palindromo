@@ -1,45 +1,39 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require("path");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use("/palindromo", express.static(path.join(__dirname, "public")));
 
 app.post('/palindromo', (req, res) => {
+  try {
+    const { texto } = req.body;
 
-  const dados = req.body; 
-  
-  var str = dados.texto.toUpperCase().replace(/\s+/g, ""); // Remove espaços e deixa tudo em maiúsculo
-  var isPalindromo = (str === str.split("").reverse().join("")); // Verifica se a string é um palíndromo
-
-  if (str !== "") { 
-
-    const resultado = {
-      "palindromo": isPalindromo,
-      "ocorrencias_caracteres": {}
-    };
-
-    for (let char of str) { // Conta as ocorrências de cada caractere
-      resultado.ocorrencias_caracteres[char] = (resultado.ocorrencias_caracteres[char] || 0) + 1;
+    if (!texto) {
+      return res.status(400).json({ error: "Favor fornecer uma string no corpo da requisição." });
     }
 
-    res.status(200).json(resultado); 
+    const str = texto.toUpperCase().replace(/\s+/g, "");
+    const isPalindromo = (str === str.split("").reverse().join(""));
 
-  } else {
-    res.status(400).send("Favor fornecer uma string!");
+    const ocorrencias_caracteres = {};
+    for (let char of str) {
+      ocorrencias_caracteres[char] = (ocorrencias_caracteres[char] || 0) + 1;
+    }
+
+    const resultado = {
+      palindromo: isPalindromo,
+      ocorrencias_caracteres
+    };
+
+    res.status(200).json(resultado);
+  } catch (error) {
+    console.error("Erro durante o processamento da solicitação:", error);
+    res.status(500).json({ error: "Ocorreu um erro durante o processamento da solicitação." });
   }
 });
 
-// Tratamento de erros
-app.use(function (error, res) {
-  console.error(error.stack);
-  res.status(400).send(error.message);
+app.listen(port, () => {
+  console.log(`Servidor ouvindo na porta ${port}`);
 });
-
-app.listen(port, () => console.log("Aplicação listada na porta: " + port));
